@@ -1,10 +1,6 @@
 parent1,child1
-parent1,parent3
-child1,parent3
 parent2,parent1
 parent2,child1
 parent2,parent3
-child2,parent2
-child2,parent3
-child2,child3
-child3,parent3
+parent3,parent1
+child3,child2

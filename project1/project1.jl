@@ -4,6 +4,8 @@ using Random
 using DelimitedFiles
 using SpecialFunctions
 using LinearAlgebra
+using TikzGraphs
+using TikzPictures
 
 """
   write_gph(dag::DiGraph, idx2names, filename)
@@ -101,7 +103,7 @@ end
 # ---------- Compute ----------
 function compute(infile, outfile)
   filedata = readlines(infile)
-  names = split(filedata[1], ",")
+  names = copy(split(filedata[1], ","))
   num_vars = length(names)
   idx2names = Dict{Int, String}()
   vars = zeros(Int8, num_vars)
@@ -125,6 +127,8 @@ function compute(infile, outfile)
   G = fit(k2search, vars, D)
 
   write_gph(G, idx2names, outfile)
+  p = plot(G, ["N1","N2","N3","N4","N48","N6","N7","N14","N15","N17","N49","N33","N10","N34","N11","N16","N27","N19","N31","N32","N40","N5","N12","N41","N47","N8","N9","N13","N24","N21","N37","N44","N45","N39","N18","N46","N29","N36","N43","N42","N20","N22","N23","N30","N38","N26","N28","N50","N25","N35"])
+  save(PDF("graph.pdf"), p)
   final_score = bayesian_score(vars, G, D)
   @printf(stdout, "Final bayesian score: %f\n", final_score)
 end
